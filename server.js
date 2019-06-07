@@ -9,18 +9,21 @@
     const mongoDB = require('./services/db.connect');
     const path = require('path');
     const ejs = require('ejs');
+   // const cors =  require('cors');
 
     
     //CONF SERVER
     class ServerClass {
 
         
-        init(){
-            //=> Use path to add views
+        init(){ 
             server.engine( 'html', ejs.renderFile );
             server.set( 'view engine', 'html' );
-          //  server.set( 'views', __dirname + '/www' );
-          //  server.use( express.static(path.join(__dirname, 'www')) );
+            server.set( 'views', __dirname + '/www' );
+            server.use( express.static(path.join(__dirname, 'www')) );
+            //server.use( cors())
+
+            
 
             // BODY PARSER 
             server.use(bodyParser.json({limit: '10mb'}));

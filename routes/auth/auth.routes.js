@@ -1,62 +1,145 @@
-//IMPORT
+/*
+Imports
+*/
+    // Node
     const express = require('express');
     const authRouter = express.Router();
-    const { sendBodyError, sendFieldsError, sendApiSuccessResponse, sendApiErrorResponse } = require('../../services/server.response');
-    const { checkFields } = require('../../services/request.checker');
-    const { register, login  } = require('./auth.controller');
 
-//ROUTES
+    // Inner
+    const Mandatory = require('../../services/mandatory.service');
+    const Vocabulary = require('../../services/vocabulary.service');
+    const { sendBodyError, sendFieldsError, sendApiSuccessResponse, sendApiErrorResponse } = require('../../services/response.service');
+    const { checkFields } = require('../../services/request.service');
+    const { register, confirmIdentity, login, setPassword } = require('./auth.controller');
+//
+
+/*
+Routes definition
+*/
     class AuthRouterClass {
+
+        // Inject Passport to secure routes
+        constructor({ passport }) {
+            this.passport = passport;
+             
+        }
+        
+        // Set route fonctions
         routes(){
 
-            // TEST
-            authRouter.get( '/test', (req, res) => { 
-                res.json('HATEOAS for auth')
-            })
-
-            // ENREGISTREMENT
+            /**
+             * POST Route to create new identity
+             * @param body: Object => email: String (unique), password: String
+             * @callback => create identity and associated user
+            */
             authRouter.post( '/register', (req, res) => {
-                //Cre
-                res.cookie('SESS-MCBA', 'John Doe', { signed: true, httpOnly: true });
+                console.log(req.body)
+                // Check request body
+                if (typeof req.body === 'undefined' || req.body === null) { sendBodyError(res, Vocabulary.errors.noBody) };
+                // Check fields in the body
+                const { miss, extra, ok } = checkFields( Mandatory.register, req.body );
 
-                // Vérification du body
-                if (typeof req.body === 'undefined' || req.body === null) { sendBodyError(res, 'Pas de donnée dans le body') }
-                //Check si tous les champs sont renseigné
-                const { miss, extra, ok } = checkFields(['email', 'password', 'first_name', 'last_name'], req.body);
-                //Si il y a un problème sur les champs renseigné
-                if (!ok) { sendFieldsError(res, 'Bad fields provided', miss, extra) }
-                //Si tout va bien
+                //=> Error: bad fields provided
+                if (!ok) { sendFieldsError(res, Vocabulary.errors.badFields, miss, extra) }
                 else{
-                    register(req.body, res)
-                    .then( apiResponse => sendApiSuccessResponse(res, 'User is registrated', apiResponse) )
-                    .catch( apiResponse => sendApiErrorResponse(res, 'Error during user registration', apiResponse))
-                }
-            })
+                    //=> Request is valid: use controller
+                    register(req.body)
+                    .then( apiResponse => sendApiSuccessResponse(res, Vocabulary.request.success, apiResponse) )
+                    .catch( apiResponse => sendApiErrorResponse(res, Vocabulary.request.error, apiResponse))
+                };
+            });
 
-            // CONNEXION
+            /**
+             * POST Route to validate identity
+             * @param body: Object => _id: String, password: String
+             * @callback => change identity.isValidated to 'true'
+            */
+            authRouter.post( '/identity-validation', (req, res) => {
+                // Check request body
+                if (typeof req.body === 'undefined' || req.body === null) { sendBodyError(res, Vocabulary.errors.noBody) };
+                // Check fields in the body
+                const { miss, extra, ok } = checkFields( Mandatory.idValidation, req.body );
+                
+                //=> Error: bad fields provided
+                if (!ok) { sendFieldsError(res, Vocabulary.errors.badFields, miss, extra) }
+                else{
+                    //=> Request is valid: use controller
+                    confirmIdentity(req.body)
+                    .then( apiResponse => sendApiSuccessResponse(res, Vocabulary.request.success, apiResponse) )
+                    .catch( apiResponse => sendApiErrorResponse(res, Vocabulary.request.error, apiResponse) );
+                };
+            });
+
+            /**
+             * POST Route to login user
+             * @param body: Object => email: String, password: String
+             * @callback => send user _id and date informations
+            */
             authRouter.post( '/login', (req, res) => {
-                console.log(req.signedCookies['SESS-MCBA'])
+                // Check request body
+                if (typeof req.body === 'undefined' || req.body === null) { sendBodyError(res, Vocabulary.errors.noBody) };
+                // Check fields in the body
+                const { miss, extra, ok } = checkFields( Mandatory.login, req.body );
 
-                // Vérification du body
-                if (typeof req.body === 'undefined' || req.body === null) { sendBodyError(res, 'No body data provided') }
-                //Check si tous les champs sont renseigné
-                const { miss, extra, ok } = checkFields(['email', 'password'], req.body);
-                //Si il y a un problème sur les champs renseigné
-                if (!ok) { sendFieldsError(res, 'Bad fields provided', miss, extra) }
-                 //Si tout va bien
+                //=> Error: bad fields provided
+                if (!ok) { sendFieldsError(res, Vocabulary.errors.badFields, miss, extra) }
                 else{
-                    login(req.body, req)
-                    .then( apiResponse => sendApiSuccessResponse(res, 'User is logged', apiResponse) )
-                    .catch( apiResponse => sendApiErrorResponse(res, 'Error during user login', apiResponse))
-                }
-            }) 
-        }
+                    //=> Request is valid: use controller
+                    login(req.body, res)
+                    .then( apiResponse => sendApiSuccessResponse(res, Vocabulary.request.success, apiResponse) )
+                    .catch( apiResponse => sendApiErrorResponse(res, Vocabulary.request.error, apiResponse) );
+                };
+            });
 
+            /**
+             * GET Route to check identity token (for Angular AuthGuard)
+             * @param passport: AuthStrategy => use the access token to check user identity
+             * @callback => send user _id and date informations
+            */
+           
+            authRouter.get( '/', this.passport.authenticate('jwt', { session: false }), (req, res) => {
+                console.log("je suis dedans")
+                // Check if identity is validated for security strategy
+                if(req.user.isValidated) return sendApiSuccessResponse(res, Vocabulary.request.success, { _id: req.user._id, lastConnection: req.user.lastConnection })
+                else return sendApiErrorResponse(res, Vocabulary.request.error, 'Identity not validated');
+            });
+
+            /**
+             * GET Route to check identity token (for Angular AuthGuard)
+             * @param passport: AuthStrategy => use the access token to check user identity
+             * @param body: Object => password: String, newPassword: String
+             * @callback => send user _id and date informations
+            */
+            authRouter.post( '/password', this.passport.authenticate('jwt', { session: false }), (req, res) => {
+                // Check request body
+                if (typeof req.body === 'undefined' || req.body === null) { sendBodyError(res, Vocabulary.errors.noBody) };
+                // Check fields in the body
+                const { miss, extra, ok } = checkFields( Mandatory.changePassword, req.body );
+
+                //=> Error: bad fields provided
+                if (!ok) { sendFieldsError(res, Vocabulary.errors.badFields, miss, extra) }
+                else{
+                    //=> Request is valid: use controller
+                    setPassword(req.body, req.user, res)
+                    .then( apiResponse => sendApiSuccessResponse(res, Vocabulary.request.success, apiResponse) )
+                    .catch( apiResponse => sendApiErrorResponse(res, Vocabulary.request.error, apiResponse) );
+                };
+            });
+        };
+
+        // Start router
         init(){
+            // Get route fonctions
             this.routes();
-            return authRouter;
-        }
-    }
 
-//EXPORT
-    module.exports = AuthRouterClass; 
+            // Sendback router
+            return authRouter;
+        };
+    };
+//
+
+/*
+Export
+*/
+    module.exports = AuthRouterClass;
+//

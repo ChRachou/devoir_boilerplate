@@ -1,24 +1,47 @@
-//IMPORT
+/*
+Imports
+*/
+    // NodeJS
     const { Router } = require('express');
-    const AuthRouterClass = require('./auth/auth.routes');
-
-
-//SECURISER LES CONNEXIONS UTILISATEURS & JWT
     const passport = require('passport');
-    const { setAuthentication } = require('../services/authentication');
+
+    // Authentication
+    const { setAuthentication } = require('../services/auth.service');
     setAuthentication(passport);
 
+    // Routers
+    const AuthRouterClass = require('./auth/auth.routes');
+    const FrontRouterClass = require('./front/front.routes');
+//
 
-//ROUTER
+/*
+Define routers
+*/
+    // Parent
     const mainRouter = Router();
     const apiRouter = Router();
-    
-    const authRouter = new AuthRouterClass();  
-
-//CONFIG ROUTES
     mainRouter.use('/api', apiRouter);
-    apiRouter.use('/auth', authRouter.init()); 
 
-//EXPORT
+
+    // Child
+    const authRouter = new AuthRouterClass({ passport });
+    const frontRouter = new FrontRouterClass({ passport });
+    
+    
+//
+
+/*
+Configure routes
+*/
+    // Set API routers
+    apiRouter.use('/auth', authRouter.init());
+
+    // Set front router
+    mainRouter.use('/', frontRouter.init());
+//
+
+/*
+Export
+*/
     module.exports = { mainRouter };
- 
+//

@@ -1,10 +1,31 @@
-import { Component } from '@angular/core';
+/* 
+Imports 
+*/
+  import { Component } from '@angular/core';
+//
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
-export class AppComponent {
-  title = 'boilerplate';
-}
+
+/* 
+Definition
+*/
+  @Component({
+    selector: 'app-root',
+    template: `
+      <header>
+        <app-header></app-header>
+      </header>
+      
+      <main class="maxWidth">
+        <router-outlet></router-outlet>
+      </main>
+    `,
+  })
+//
+
+/* 
+Export
+*/
+  export class AppComponent {
+    title = 'ANGclient';
+  }
+//
