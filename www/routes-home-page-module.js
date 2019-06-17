@@ -1,35 +1,13 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["routes-home-page-module"],{
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/components/form-login/form-login.component.html":
-/*!*******************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/components/form-login/form-login.component.html ***!
-  \*******************************************************************************************/
+/***/ "./src/app/components/form-login/form-login.component.html":
+/*!*****************************************************************!*\
+  !*** ./src/app/components/form-login/form-login.component.html ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 module.exports = "<form autocomplete=\"off\" novalidate [formGroup]=\"form\" (submit)=\"submitForm()\">\n  <label for=\"email-login\">Email</label>\n  <input type=\"email\" name=\"email-login\" id=\"email-login\" required minlength=\"5\" formControlName = \"email\">\n\n  <label for=\"password-login\">Mot de passe</label>\n  <input type=\"password\" name=\"password-login\" id=\"password-login\" required minlength=\"5\" formControlName = \"password\">\n\n  <button type=\"submit\" [disabled]='!form.valid'>Connexion</button>\n</form>"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/components/form-register/form-register.component.html":
-/*!*************************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/components/form-register/form-register.component.html ***!
-  \*************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<form autocomplete=\"off\" novalidate [formGroup]=\"form\" (submit)=\"submitForm()\">\n  <label for=\"email-register\">Email</label>\n  <input type=\"email\" name=\"email-register\" id=\"email-register\" required minlength=\"5\" formControlName = \"email\">\n\n  <label for=\"password-register\">Mot de passe</label>\n  <input type=\"password\" name=\"password-register\" id=\"password-register\" required minlength=\"5\" formControlName = \"password\">\n\n  <label for=\"securePassword\">Répéter le mot de passe <span *ngIf=\"passwordError\">Incorrect</span></label>\n  <input type=\"password\" name=\"securePassword\" id=\"securePassword\" required minlength=\"5\" formControlName = \"securePassword\">\n\n  <button type=\"submit\" [disabled]='!form.valid'>Inscription</button>\n</form>"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/routes/home-page/home-page.component.html":
-/*!*************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/routes/home-page/home-page.component.html ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<section class=\"flexBox spaceBetween\">\n    <article>\n            <h2>Connexion</h2>\n            <app-form-login \n            (sendFormData)=\"connectUser($event)\" \n            [resetFormData]=\"resetFormDataLogin\"\n            ></app-form-login>\n            \n            <app-form-response\n                *ngIf=\"displayReturnLogin\"\n                [content]=\"apiMessageLogin\"\n                [class]=\"messageClassLogin\"\n                (close)=\"displayReturnLogin = false\"\n            ></app-form-response>\n    </article>\n    \n    <article>\n        <h2>Inscription</h2>\n        <app-form-register \n        (sendFormData)=\"registerUser($event)\" \n        [resetFormData]=\"resetFormDataRegister\"\n        ></app-form-register>\n    \n        <app-form-response\n            *ngIf=\"displayReturnRegister\"\n            [content]=\"apiMessageRegister\"\n            [class]=\"messageClassRegister\"\n            (close)=\"displayReturnRegister = false\"\n        ></app-form-response>\n    </article>\n</section>"
 
 /***/ }),
 
@@ -117,7 +95,7 @@ var FormLoginComponent = /** @class */ (function () {
     FormLoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-form-login',
-            template: __webpack_require__(/*! raw-loader!./form-login.component.html */ "./node_modules/raw-loader/index.js!./src/app/components/form-login/form-login.component.html"),
+            template: __webpack_require__(/*! ./form-login.component.html */ "./src/app/components/form-login/form-login.component.html"),
         })
         //
         /* Export */
@@ -185,6 +163,17 @@ var FormLoginModule = /** @class */ (function () {
 ;
 //
 
+
+/***/ }),
+
+/***/ "./src/app/components/form-register/form-register.component.html":
+/*!***********************************************************************!*\
+  !*** ./src/app/components/form-register/form-register.component.html ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<form autocomplete=\"off\" novalidate [formGroup]=\"form\" (submit)=\"submitForm()\">\n  <label for=\"email-register\">Email</label>\n  <input type=\"email\" name=\"email-register\" id=\"email-register\" required minlength=\"5\" formControlName = \"email\">\n\n  <label for=\"password-register\">Mot de passe</label>\n  <input type=\"password\" name=\"password-register\" id=\"password-register\" required minlength=\"5\" formControlName = \"password\">\n\n  <label for=\"securePassword\">Répéter le mot de passe <span *ngIf=\"passwordError\">Incorrect</span></label>\n  <input type=\"password\" name=\"securePassword\" id=\"securePassword\" required minlength=\"5\" formControlName = \"securePassword\">\n\n  <button type=\"submit\" [disabled]='!form.valid'>Inscription</button>\n</form>"
 
 /***/ }),
 
@@ -281,7 +270,7 @@ var FormRegisterComponent = /** @class */ (function () {
     FormRegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-form-register',
-            template: __webpack_require__(/*! raw-loader!./form-register.component.html */ "./node_modules/raw-loader/index.js!./src/app/components/form-register/form-register.component.html"),
+            template: __webpack_require__(/*! ./form-register.component.html */ "./src/app/components/form-register/form-register.component.html"),
         })
         //
         /* Export */
@@ -352,6 +341,17 @@ var FormRegisterModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/routes/home-page/home-page.component.html":
+/*!***********************************************************!*\
+  !*** ./src/app/routes/home-page/home-page.component.html ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section class=\"flexBox spaceBetween\">\n    <article>\n            <h2>Connexion</h2>\n            <app-form-login \n            (sendFormData)=\"connectUser($event)\" \n            [resetFormData]=\"resetFormDataLogin\"\n            ></app-form-login>\n            \n            <app-form-response\n                *ngIf=\"displayReturnLogin\"\n                [content]=\"apiMessageLogin\"\n                [class]=\"messageClassLogin\"\n                (close)=\"displayReturnLogin = false\"\n            ></app-form-response>\n    </article>\n    \n    <article>\n        <h2>Inscription</h2>\n        <app-form-register \n        (sendFormData)=\"registerUser($event)\" \n        [resetFormData]=\"resetFormDataRegister\"\n        ></app-form-register>\n    \n        <app-form-response\n            *ngIf=\"displayReturnRegister\"\n            [content]=\"apiMessageRegister\"\n            [class]=\"messageClassRegister\"\n            (close)=\"displayReturnRegister = false\"\n        ></app-form-response>\n    </article>\n</section>"
+
+/***/ }),
+
 /***/ "./src/app/routes/home-page/home-page.component.ts":
 /*!*********************************************************!*\
   !*** ./src/app/routes/home-page/home-page.component.ts ***!
@@ -365,6 +365,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth-service.service */ "./src/app/services/auth/auth-service.service.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/ngx-cookie-service.es5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 /*
 Imports & definition
@@ -372,12 +374,17 @@ Imports & definition
 // Imports
 
 
+// Cookie service
+
+
 // Definition
 var HomePageComponent = /** @class */ (function () {
     // Module injection
-    function HomePageComponent(AuthService) {
+    function HomePageComponent(AuthService, Router, cookieService) {
         var _this = this;
         this.AuthService = AuthService;
+        this.Router = Router;
+        this.cookieService = cookieService;
         /*
         Config.
         */
@@ -402,9 +409,10 @@ var HomePageComponent = /** @class */ (function () {
                 _this.displayReturnRegister = true;
                 // Reset form data
                 _this.resetFormDataRegister = true;
+                _this.cookieService.set('userid', apiResponse.data._id);
+                _this.Router.navigate(['me']);
             })
                 .catch(function (apiResponse) {
-                console.log(apiResponse);
                 // API error response
                 _this.messageClassRegister = 'error';
                 _this.apiMessageRegister = apiResponse.message;
@@ -422,9 +430,10 @@ var HomePageComponent = /** @class */ (function () {
                 _this.displayReturnLogin = true;
                 // Reset form data
                 _this.resetFormDataLogin = true;
+                _this.cookieService.set('userid', apiResponse.data._id);
+                _this.Router.navigate(['me']);
             })
                 .catch(function (apiResponse) {
-                console.log(apiResponse);
                 // API error response
                 _this.messageClassLogin = 'error';
                 _this.apiMessageLogin = apiResponse.message;
@@ -442,15 +451,17 @@ var HomePageComponent = /** @class */ (function () {
     HomePageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-home-page',
-            template: __webpack_require__(/*! raw-loader!./home-page.component.html */ "./node_modules/raw-loader/index.js!./src/app/routes/home-page/home-page.component.html"),
-            providers: [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]]
+            template: __webpack_require__(/*! ./home-page.component.html */ "./src/app/routes/home-page/home-page.component.html"),
+            providers: [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__["CookieService"]]
         })
         //
         /*
         Export
         */
         ,
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__["CookieService"]])
     ], HomePageComponent);
     return HomePageComponent;
 }());

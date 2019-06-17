@@ -63,7 +63,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"default~routes-home-page-module~routes-identity-validation-module~routes-reset-password-page-module":"default~routes-home-page-module~routes-identity-validation-module~routes-reset-password-page-module","routes-home-page-module":"routes-home-page-module","routes-identity-validation-module":"routes-identity-validation-module","routes-reset-password-page-module":"routes-reset-password-page-module","routes-user-page-module":"routes-user-page-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"common":"common","routes-user-page-module":"routes-user-page-module","default~routes-home-page-module~routes-identity-validation-module~routes-reset-password-page-module":"default~routes-home-page-module~routes-identity-validation-module~routes-reset-password-page-module","routes-home-page-module":"routes-home-page-module","routes-identity-validation-module":"routes-identity-validation-module","routes-reset-password-page-module":"routes-reset-password-page-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -112,6 +112,7 @@
 /******/ 				promises.push(installedChunkData[2] = promise);
 /******/
 /******/ 				// start chunk loading
+/******/ 				var head = document.getElementsByTagName('head')[0];
 /******/ 				var script = document.createElement('script');
 /******/ 				var onScriptComplete;
 /******/
@@ -143,7 +144,7 @@
 /******/ 					onScriptComplete({ type: 'timeout', target: script });
 /******/ 				}, 120000);
 /******/ 				script.onerror = script.onload = onScriptComplete;
-/******/ 				document.head.appendChild(script);
+/******/ 				head.appendChild(script);
 /******/ 			}
 /******/ 		}
 /******/ 		return Promise.all(promises);

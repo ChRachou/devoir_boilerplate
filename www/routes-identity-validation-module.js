@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["routes-identity-validation-module"],{
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/routes/identity-validation/identity-validation.component.html":
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/routes/identity-validation/identity-validation.component.html ***!
-  \*********************************************************************************************************/
+/***/ "./src/app/routes/identity-validation/identity-validation.component.html":
+/*!*******************************************************************************!*\
+  !*** ./src/app/routes/identity-validation/identity-validation.component.html ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -95,7 +95,7 @@ var IdentityValidationComponent = /** @class */ (function () {
     IdentityValidationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-identity-validation',
-            template: __webpack_require__(/*! raw-loader!./identity-validation.component.html */ "./node_modules/raw-loader/index.js!./src/app/routes/identity-validation/identity-validation.component.html"),
+            template: __webpack_require__(/*! ./identity-validation.component.html */ "./src/app/routes/identity-validation/identity-validation.component.html"),
             providers: [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]]
         })
         //

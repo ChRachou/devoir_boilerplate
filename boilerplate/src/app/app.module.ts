@@ -14,6 +14,7 @@ Imports
 
   // Inner modules
   import { HeaderModule } from "./components/header/module";
+  import { CookieService } from 'ngx-cookie-service';
 //
 
 

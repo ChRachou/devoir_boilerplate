@@ -1,3 +1,15 @@
-<p>
-  user-page works!
-</p>
+<div>
+    <p>Mee</p>
+    <h1>Time : {{time}}</h1>
+    <p>{{qtt}}</p>
+
+    <button [disabled]="stop" (click)="onClickMe()">ON CLICK</button> <br><br>
+
+    <button (click)="onRestart()">RESTART</button>
+
+    <h2>Ranking</h2>
+    <div *ngFor="let game of games">
+        <div>Point : {{game.point}}</div>
+        <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>
+    </div>
+</div>

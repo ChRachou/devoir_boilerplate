@@ -70,7 +70,6 @@ Export
             this.resetFormData = true;
           })
           .catch( (apiResponse: ApiResponseModel) => {
-            console.log(apiResponse)
             // API error response
             this.messageClass = 'error';
             this.apiMessage = apiResponse.message;

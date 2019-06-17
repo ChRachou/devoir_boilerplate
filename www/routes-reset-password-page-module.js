@@ -1,16 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["routes-reset-password-page-module"],{
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/routes/reset-password-page/reset-password-page.component.html":
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/routes/reset-password-page/reset-password-page.component.html ***!
-  \*********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<h2>Changer de mot de passe</h2>\n<form autocomplete=\"off\" novalidate [formGroup]=\"form\" (submit)=\"submitForm()\">\n  <label for=\"actualPassword\">Mot de passe actuel</label>\n  <input type=\"password\" name=\"actualPassword\" id=\"actualPassword\" required minlength=\"5\" formControlName = \"password\">\n\n  <label for=\"newPassword\">Nouveau mot de passe</label>\n  <input type=\"password\" name=\"newPassword\" id=\"newPassword\" required minlength=\"5\" formControlName = \"newPassword\">\n\n  <label for=\"newPasswordSecure\">Nouveau mot de passe <span *ngIf=\"passwordError\">Incorrect</span></label>\n  <input type=\"password\" name=\"newPasswordSecure\" id=\"newPasswordSecure\" required minlength=\"5\" formControlName = \"secureNewPassword\" (focus)=\"passwordError = false\">\n\n  <button type=\"submit\" [disabled]='!form.valid'>Valider</button>\n</form>\n\n<app-form-response\n    *ngIf=\"displayReturn\"\n    [content]=\"apiMessage\"\n    [class]=\"messageClass\"\n    (close)=\"displayReturn = false\"\n></app-form-response>"
-
-/***/ }),
-
 /***/ "./src/app/routes/reset-password-page/module.ts":
 /*!******************************************************!*\
   !*** ./src/app/routes/reset-password-page/module.ts ***!
@@ -73,6 +62,17 @@ var Module = /** @class */ (function () {
 ;
 //
 
+
+/***/ }),
+
+/***/ "./src/app/routes/reset-password-page/reset-password-page.component.html":
+/*!*******************************************************************************!*\
+  !*** ./src/app/routes/reset-password-page/reset-password-page.component.html ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h2>Changer de mot de passe</h2>\n<form autocomplete=\"off\" novalidate [formGroup]=\"form\" (submit)=\"submitForm()\">\n  <label for=\"actualPassword\">Mot de passe actuel</label>\n  <input type=\"password\" name=\"actualPassword\" id=\"actualPassword\" required minlength=\"5\" formControlName = \"password\">\n\n  <label for=\"newPassword\">Nouveau mot de passe</label>\n  <input type=\"password\" name=\"newPassword\" id=\"newPassword\" required minlength=\"5\" formControlName = \"newPassword\">\n\n  <label for=\"newPasswordSecure\">Nouveau mot de passe <span *ngIf=\"passwordError\">Incorrect</span></label>\n  <input type=\"password\" name=\"newPasswordSecure\" id=\"newPasswordSecure\" required minlength=\"5\" formControlName = \"secureNewPassword\" (focus)=\"passwordError = false\">\n\n  <button type=\"submit\" [disabled]='!form.valid'>Valider</button>\n</form>\n\n<app-form-response\n    *ngIf=\"displayReturn\"\n    [content]=\"apiMessage\"\n    [class]=\"messageClass\"\n    (close)=\"displayReturn = false\"\n></app-form-response>"
 
 /***/ }),
 
@@ -139,7 +139,6 @@ var ResetPasswordPageComponent = /** @class */ (function () {
                     _this.resetFormData = true;
                 })
                     .catch(function (apiResponse) {
-                    console.log(apiResponse);
                     // API error response
                     _this.messageClass = 'error';
                     _this.apiMessage = apiResponse.message;
@@ -161,7 +160,7 @@ var ResetPasswordPageComponent = /** @class */ (function () {
     ResetPasswordPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-reset-password-page',
-            template: __webpack_require__(/*! raw-loader!./reset-password-page.component.html */ "./node_modules/raw-loader/index.js!./src/app/routes/reset-password-page/reset-password-page.component.html"),
+            template: __webpack_require__(/*! ./reset-password-page.component.html */ "./src/app/routes/reset-password-page/reset-password-page.component.html"),
             providers: [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]]
         })
         //

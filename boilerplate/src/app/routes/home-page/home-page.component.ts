@@ -9,11 +9,16 @@ Imports & definition
   import { ApiResponseModel } from "../../models/api.reponse.model";
   import { AuthService } from "../../services/auth/auth-service.service";
 
+  // Cookie service
+  import { CookieService } from 'ngx-cookie-service';
+
+  import { Router } from '@angular/router';
+
   // Definition
   @Component({
     selector: 'app-home-page',
     templateUrl: './home-page.component.html',
-    providers: [ AuthService ]
+    providers: [ AuthService, CookieService ]
   })
 //
 
@@ -40,7 +45,9 @@ Export
 
       // Module injection
       constructor(
-        private AuthService: AuthService
+        private AuthService: AuthService,
+        private Router: Router,
+        private cookieService: CookieService
       ) {};
     //
 
@@ -60,9 +67,13 @@ Export
 
           // Reset form data
           this.resetFormDataRegister = true;
+
+          this.cookieService.set('userid', apiResponse.data._id);
+          this.Router.navigate([ 'me' ]);
+
+          
         })
         .catch( (apiResponse: ApiResponseModel) => {
-          console.log(apiResponse)
           // API error response
           this.messageClassRegister = 'error';
           this.apiMessageRegister = apiResponse.message;
@@ -73,18 +84,22 @@ Export
       // Connnect new user
       public connectUser = (data: IdentityModel) => {
         // Send user data
+        
         this.AuthService.login(data)
         .then( (apiResponse: ApiResponseModel) => {
           // API success response
           this.messageClassLogin = 'success';
           this.apiMessageLogin = apiResponse.message;
+
           this.displayReturnLogin = true;
 
           // Reset form data
           this.resetFormDataLogin = true;
+          
+          this.cookieService.set('userid', apiResponse.data._id);
+          this.Router.navigate([ 'me' ]);
         })
         .catch( (apiResponse: ApiResponseModel) => {
-          console.log(apiResponse)
           // API error response
           this.messageClassLogin = 'error';
           this.apiMessageLogin = apiResponse.message;

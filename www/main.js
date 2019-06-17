@@ -1,16 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],{
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/components/header/header.component.html":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/components/header/header.component.html ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<section class=\"maxWidth\">\n  <h1>MEAN stack boilerplate</h1>\n  <p>Boilerplate code to start a MEAN stack project</p>\n  <nav>\n    <ul>\n      <li><a [routerLink]=\"'/'\">Homepage</a></li>\n      <li><a [routerLink]=\"'/me'\">Me</a></li>\n    </ul>\n  </nav>\n</section>"
-
-/***/ }),
-
 /***/ "./src/$$_lazy_route_resource lazy recursive":
 /*!**********************************************************!*\
   !*** ./src/$$_lazy_route_resource lazy namespace object ***!
@@ -22,34 +11,38 @@ var map = {
 	"./routes/home-page/module": [
 		"./src/app/routes/home-page/module.ts",
 		"default~routes-home-page-module~routes-identity-validation-module~routes-reset-password-page-module",
+		"common",
 		"routes-home-page-module"
 	],
 	"./routes/identity-validation/module": [
 		"./src/app/routes/identity-validation/module.ts",
 		"default~routes-home-page-module~routes-identity-validation-module~routes-reset-password-page-module",
+		"common",
 		"routes-identity-validation-module"
 	],
 	"./routes/reset-password-page/module": [
 		"./src/app/routes/reset-password-page/module.ts",
 		"default~routes-home-page-module~routes-identity-validation-module~routes-reset-password-page-module",
+		"common",
 		"routes-reset-password-page-module"
 	],
 	"./routes/user-page/module": [
 		"./src/app/routes/user-page/module.ts",
+		"common",
 		"routes-user-page-module"
 	]
 };
 function webpackAsyncContext(req) {
-	if(!__webpack_require__.o(map, req)) {
+	var ids = map[req];
+	if(!ids) {
 		return Promise.resolve().then(function() {
 			var e = new Error("Cannot find module '" + req + "'");
 			e.code = 'MODULE_NOT_FOUND';
 			throw e;
 		});
 	}
-
-	var ids = map[req], id = ids[0];
 	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
+		var id = ids[0];
 		return __webpack_require__(id);
 	});
 }
@@ -285,6 +278,17 @@ var AuthGuard = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/header/header.component.html":
+/*!*********************************************************!*\
+  !*** ./src/app/components/header/header.component.html ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section class=\"maxWidth\">\n  <h1>MEAN stack boilerplate</h1>\n  <p>Boilerplate code to start a MEAN stack project</p>\n  <nav>\n    <ul>\n      <li><a [routerLink]=\"'/'\">Homepage</a></li>\n      <li><a [routerLink]=\"'/me'\">Me</a></li>\n    </ul>\n  </nav>\n</section>"
+
+/***/ }),
+
 /***/ "./src/app/components/header/header.component.ts":
 /*!*******************************************************!*\
   !*** ./src/app/components/header/header.component.ts ***!
@@ -307,7 +311,7 @@ var HeaderComponent = /** @class */ (function () {
     HeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-header',
-            template: __webpack_require__(/*! raw-loader!./header.component.html */ "./node_modules/raw-loader/index.js!./src/app/components/header/header.component.html")
+            template: __webpack_require__(/*! ./header.component.html */ "./src/app/components/header/header.component.html")
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], HeaderComponent);
