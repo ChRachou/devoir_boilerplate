@@ -8,7 +8,7 @@
     <button (click)="onRestart()">RESTART</button>
 
     <h2>Ranking</h2>
-    <div *ngFor="let game of games">
+    <div *ngFor="let game of games ">
         <div>Point : {{game.point}}</div>
         <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>
     </div>

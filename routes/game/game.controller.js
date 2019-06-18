@@ -8,10 +8,10 @@ const save = body => {
 
 const getAllGames = userId => {    
     return new Promise( (resolve, reject) => {       
-        GameModel.find( { user : userId }, (error, user) => {
+        GameModel.find( { user : userId }, (error, games) => { 
             if(error) return reject(error)
-            else if(!user) return reject('Unknow identity')
-            else {  return resolve(user) }
+            else if(!userId) return reject('User inconnu')
+            else {  return resolve(games) }
         } )
     });
 }

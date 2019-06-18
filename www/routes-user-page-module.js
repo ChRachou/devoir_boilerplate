@@ -99,7 +99,7 @@ var Routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forCh
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    <p>Mee</p>\n    <h1>Time : {{time}}</h1>\n    <p>{{qtt}}</p>\n\n    <button [disabled]=\"stop\" (click)=\"onClickMe()\">ON CLICK</button> <br><br>\n\n    <button (click)=\"onRestart()\">RESTART</button>\n\n    <h2>Ranking</h2>\n    <div *ngFor=\"let game of games\">\n        <div>Point : {{game.point}}</div>\n        <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>\n    </div>\n</div>"
+module.exports = "<div>\n    <p>Mee</p>\n    <h1>Time : {{time}}</h1>\n    <p>{{qtt}}</p>\n\n    <button [disabled]=\"stop\" (click)=\"onClickMe()\">ON CLICK</button> <br><br>\n\n    <button (click)=\"onRestart()\">RESTART</button>\n\n    <h2>Ranking</h2>\n    <div *ngFor=\"let game of games \">\n        <div>Point : {{game.point}}</div>\n        <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -144,7 +144,7 @@ var UserPageComponent = /** @class */ (function () {
         this.time = 5;
         this.stop = false;
         this.first = true;
-        this.data = {};
+        this.data = [];
         this.games = {};
         this.saveGame = function (data) {
             // Send user data
@@ -199,12 +199,15 @@ var UserPageComponent = /** @class */ (function () {
                     time: new Date()
                 };
                 _this.saveGame(data);
+                _this.getAll();
             }
         }, 1000);
     };
     UserPageComponent.prototype.getAll = function () {
+        var _this = this;
         this.GameService.getGames().then(function (data) {
-            // this.games = data.message;
+            //Récupère les games du joueur  
+            _this.games = data.message;
         });
     };
     ;
