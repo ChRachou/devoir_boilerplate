@@ -1,15 +1,14 @@
-<div>
-    <p>Mee</p>
-    <h1>Time : {{time}}</h1>
+<div> 
+    <h1>Secondes : {{time}}</h1>
     <p>{{qtt}}</p>
 
-    <button [disabled]="stop" (click)="onClickMe()">ON CLICK</button> <br><br>
+    <button [disabled]="stop" (click)="onClickMe()">Cliquez le plus de fois possible ! </button> <br><br>
 
-    <button (click)="onRestart()">RESTART</button>
+    <button (click)="onRestart()">Recommencer</button>
 
-    <h2>Ranking</h2>
-    <div *ngFor="let game of games ">
-        <div>Point : {{game.point}}</div>
+    <h2>Ancienne Partie</h2>
+    <div *ngFor="let game of games">
+        <div> Nombre de Point</div> : {{game.point}}</div>
         <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>
     </div>
 </div>

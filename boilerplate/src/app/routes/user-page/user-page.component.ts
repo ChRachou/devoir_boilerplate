@@ -11,29 +11,27 @@ Imports & definition
   import { AuthService } from "../../services/auth/auth-service.service";
   import { GameService } from "../../services/game/game-service.service";
    // Cookie service
-  import { CookieService } from 'ngx-cookie-service'; 
+  import { CookieService } from 'ngx-cookie-service';
 
   // Definition
   @Component({
     selector: 'app-user-page',
     templateUrl: './user-page.component.html',
     providers: [ AuthService, GameService, CookieService ]
-  }) 
+  })
 //
 
 
 /* 
 Export
 */
- 
-  
   export class UserPageComponent implements OnInit {
     user: IdentityModel[] = [];
     qtt = 0;
-    time = 5;
+    time = 10;
     stop = false;
     first = true;
-    data = [];
+    data = {};
     games = {}
     public apiMessageLogin : String
     /* 
@@ -65,7 +63,7 @@ Export
 
     onRestart() {
         this.qtt = 0;
-        this.time = 5;
+        this.time = 10;
         this.stop = false;
         this.first = true;
     }
@@ -84,7 +82,7 @@ Export
                     time : new Date()
                 }
 
-                this.saveGame(data);
+                this.saveGame(data)
                 this.getAll();
             }
             
@@ -108,9 +106,8 @@ Export
     };
 
     public getAll() {
-        this.GameService.getGames().then((data) => { 
-            //Récupère les games du joueur  
-            this.games = data.message ; 
+        this.GameService.getGames().then((data) => {
+           this.games = data.message;
         }) 
     };
 

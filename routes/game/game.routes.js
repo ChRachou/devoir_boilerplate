@@ -17,8 +17,7 @@ class GameRouterClass {
 
     routes() {
        
-        gameRouter.post( '/', (req, res) => {  
-            console.log("body save partie", req.body)          
+        gameRouter.post( '/', (req, res) => {            
             save(req.body)
             .then( apiResponse => sendApiSuccessResponse(res, Vocabulary.request.success, apiResponse) )
             .catch( apiResponse => sendApiErrorResponse(res, Vocabulary.request.error, apiResponse))
