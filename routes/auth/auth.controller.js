@@ -13,16 +13,18 @@ Methods
      * Register new identity and user
      * @param body => email: String (unique), password: String
     */
-    const register = body => {
-        return new Promise( (resolve, reject) => {
-            // Search user by email
-            IdentityModel.findOne( { email: body.email }, (error, user) => {
-                if(error) return reject(error) // Mongo Error
-                else if(user) return reject('Identity already exist')
-                else{
-                    // Encrypt user password
-                    bcrypt.hash( body.password, 10 )
-                    .then( hashedPassword => {
+   const register = body => {
+    return new Promise((resolve, reject) => {
+        // Search user by email
+        IdentityModel.findOne({
+            email: body.email
+        }, (error, user) => {
+            if (error) return reject(error) // Mongo Error
+            else if (user) return reject('Identity already exist')
+            else {
+                // Encrypt user password
+                bcrypt.hash(body.password, 10)
+                    .then(hashedPassword => {
                         // Replace pasword
                         const clearPassword = body.password;
                         body.password = hashedPassword;
@@ -30,29 +32,31 @@ Methods
                         // Set creation and connection date
                         body.creationDate = new Date();
                         body.lastConnection = null;
-                        //body.isValidated = false;
                         body.isValidated = true;
 
                         // Register new user
                         IdentityModel.create(body)
-                        .then( mongoResponse => {
-                            sendEmail(mongoResponse, clearPassword)
-                            .then( mailerResponse => {
-                                resolve({ _id: mongoResponse._id, creationDate: mongoResponse.creationDate })
+                            .then(mongoResponse => {
+                                sendEmail(mongoResponse, clearPassword)
+                                    .then(mailerResponse => {
+                                        resolve({
+                                            _id: mongoResponse._id,
+                                            creationDate: mongoResponse.creationDate
+                                        })
+                                    })
+                                    .catch(mailerResponse => {
+                                        reject(mailerResponse)
+                                    })
+
                             })
-                            .catch( mailerResponse => {
-                                reject(mailerResponse)
-                            })
-                            
-                        })
-                        .catch( mongoResponse => reject(mongoResponse) )
+                            .catch(mongoResponse => reject(mongoResponse))
                     })
-                    .catch( hashError => reject(hashError) );
-                };
-            });
-            
+                    .catch(hashError => reject(hashError));
+            };
         });
-    };
+
+    });
+};
 
     /**
      * Confirm user identity before login

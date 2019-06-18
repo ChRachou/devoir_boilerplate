@@ -2,13 +2,12 @@
     <h1>Secondes : {{time}}</h1>
     <p>{{qtt}}</p>
 
-    <button [disabled]="stop" (click)="onClickMe()">Cliquez le plus de fois possible ! </button> <br><br>
+    <button [disabled]="stop" (click)="onClickMe()">Cliquez le plus de fois possible ! (sur cette phrase)</button> <br><br>
 
     <button (click)="onRestart()">Recommencer</button>
 
     <h2>Ancienne Partie</h2>
     <div *ngFor="let game of games">
-        <div> Nombre de Point</div> : {{game.point}}</div>
-        <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>
+            <div>Nombre de point : {{game.point}} - Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>
     </div>
 </div>

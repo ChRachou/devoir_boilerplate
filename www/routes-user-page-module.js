@@ -99,7 +99,7 @@ var Routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forCh
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div> \n    <h1>Secondes : {{time}}</h1>\n    <p>{{qtt}}</p>\n\n    <button [disabled]=\"stop\" (click)=\"onClickMe()\">Cliquez le plus de fois possible ! </button> <br><br>\n\n    <button (click)=\"onRestart()\">Recommencer</button>\n\n    <h2>Ancienne Partie</h2>\n    <div *ngFor=\"let game of games\">\n        <div> Nombre de Point</div> : {{game.point}}</div>\n        <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>\n    </div>\n</div>"
+module.exports = "<div> \n    <h1>Secondes : {{time}}</h1>\n    <p>{{qtt}}</p>\n\n    <button [disabled]=\"stop\" (click)=\"onClickMe()\">Cliquez le plus de fois possible ! (sur cette phrase)</button> <br><br>\n\n    <button (click)=\"onRestart()\">Recommencer</button>\n\n    <h2>Ancienne Partie</h2>\n    <div *ngFor=\"let game of games\">\n            <div>Nombre de point : {{game.point}} - Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>\n    </div>\n</div>"
 
 /***/ }),
 
