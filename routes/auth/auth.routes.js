@@ -98,7 +98,7 @@ Routes definition
             */
            
             authRouter.get( '/', this.passport.authenticate('jwt', { session: false }), (req, res) => {
-                console.log("je suis dedans")
+                
                 // Check if identity is validated for security strategy
                 if(req.user.isValidated) return sendApiSuccessResponse(res, Vocabulary.request.success, { _id: req.user._id, lastConnection: req.user.lastConnection })
                 else return sendApiErrorResponse(res, Vocabulary.request.error, 'Identity not validated');
